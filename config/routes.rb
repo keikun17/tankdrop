@@ -1,6 +1,8 @@
 Tankdrop::Application.routes.draw do
   resources :products do
-    
+    collection do
+      get 'upload'
+    end
   end
   # The priority is based upon order of creation:
   # first created -> highest priority.
