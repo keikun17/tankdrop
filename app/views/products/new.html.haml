@@ -1,0 +1,11 @@
+Upload Product Image
+= form_for @product, :html => {:multipart => true } do |f|
+  %p
+    = f.label :product_image, "Upload Image"
+    = f.file_field :product_image
+    = f.hidden_field :product_image_cache
+  %p
+    = f.label :price
+    = f.text_field :price
+  %p
+    = f.submit "Upload"

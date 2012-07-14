@@ -1,0 +1,14 @@
+%h1 Product Page
+
+%p
+  Product name
+  = @product.name
+
+%p
+  = image_tag(@product.product_image) if @product.product_image
+
+%p
+  Product price
+  = @product.price
+
+
