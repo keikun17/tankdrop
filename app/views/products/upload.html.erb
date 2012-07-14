@@ -1,4 +1,18 @@
-<h2><%= t('photos.title') %></h2>
+<% content_for(:head) do %>
+  <%= javascript_include_tag "products.js" %>
+<% end %>
+
+<% content_for(:footer) do %>
+  <%= render 'footer_js' %>
+<% end %>
+
+<div class="page-header">
+  <h2><%= t('sell_that_thing') %></h2>
+</div>
+
+<blockquote>
+  <p>Test</p>
+</blockquote>
 <%= form_for Product.new, :html => { :multipart => true, :id => "fileupload"  } do |f| %>
         <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
         <div class="row fileupload-buttonbar">
@@ -23,11 +37,13 @@
                 </button>
                 <input type="checkbox" class="toggle">
             </div>
-            <div class="span5">
+            <div class="span5 fileupload-progress fade">
                 <!-- The global progress bar -->
-                <div class="progress progress-success progress-striped active fade">
+                <div class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
                     <div class="bar" style="width:0%;"></div>
                 </div>
+                <!-- The extended global progress information -->
+                <div class="progress-extended">&nbsp;</div>
             </div>
         </div>
         <!-- The loading indicator is shown during image processing -->
@@ -79,67 +95,31 @@
     </tr>
 {% } %}
 </script>
-<!-- The template to display files available for download -->
-<script id="template-download" type="text/x-tmpl">
-{% for (var i=0, file; file=o.files[i]; i++) { %}
-    <tr class="template-download fade">
-        {% if (file.error) { %}
-            <td></td>
-            <td class="name"><span>{%=file.name%}</span></td>
-            <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
-            <td class="error" colspan="2"><span class="label label-important">{%=locale.fileupload.error%}</span> {%=locale.fileupload.errors[file.error] || file.error%}</td>
-        {% } else { %}
-            <td class="preview">{% if (file.thumbnail_url) { %}
-                <a href="{%=file.url%}" title="{%=file.name%}" rel="gallery" download="{%=file.name%}"><img src="{%=file.thumbnail_url%}"></a>
-            {% } %}</td>
-            <td class="name">
-                <a href="{%=file.url%}" title="{%=file.name%}" rel="{%=file.thumbnail_url&&'gallery'%}" download="{%=file.name%}">{%=file.name%}</a>
-            </td>
-            <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
-            <td colspan="2"></td>
-        {% } %}
-        <td class="delete">
-            <button class="btn btn-danger" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}">
-                <i class="icon-trash icon-white"></i>
-                <span>{%=locale.fileupload.destroy%}</span>
-            </button>
-            <input type="checkbox" name="delete" value="1">
-        </td>
-    </tr>
-{% } %}
-</script>
 
+<!-- modal-gallery is the modal dialog used for the image gallery -->
+<div id="modal-gallery" class="modal modal-gallery hide fade" data-filter=":odd">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">&times;</a>
+        <h3 class="modal-title"></h3>
+    </div>
+    <div class="modal-body"><div class="modal-image"></div></div>
+    <div class="modal-footer">
+        <a class="btn modal-download" target="_blank">
+            <i class="icon-download"></i>
+            <span>Download</span>
+        </a>
+        <a class="btn btn-success modal-play modal-slideshow" data-slideshow="5000">
+            <i class="icon-play icon-white"></i>
+            <span>Slideshow</span>
+        </a>
+        <a class="btn btn-info modal-prev">
+            <i class="icon-arrow-left icon-white"></i>
+            <span>Previous</span>
+        </a>
+        <a class="btn btn-primary modal-next">
+            <span>Next</span>
+            <i class="icon-arrow-right icon-white"></i>
+        </a>
+    </div>
+</div>
 
-
-<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
-<%= javascript_include_tag 'jquery.ui.widget.js' %>
-<!-- The Templates and Load Image plugins are included for the FileUpload user interface -->
-<script src="http://blueimp.github.com/JavaScript-Templates/tmpl.min.js"></script>
-<script src="http://blueimp.github.com/JavaScript-Load-Image/load-image.min.js"></script>
-<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
-<%= javascript_include_tag 'jquery.iframe-transport.js' %>
-<%= javascript_include_tag 'jquery.fileupload.js' %>
-<%= javascript_include_tag 'jquery.fileupload-ui.js' %>
-<!-- add include_tag js files to config.assets.precompile in ...environments/production.rb if you have it in vendor/ assets -->
-
-<script type="text/javascript" charset="utf-8">
-    $(function () {
-        // Initialize the jQuery File Upload widget:
-        $('#fileupload').fileupload();
-        // 
-        // Load existing files:
-        $.getJSON($('#fileupload').prop('action'), function (files) {
-          var fu = $('#fileupload').data('fileupload'), 
-            template;
-          fu._adjustMaxNumberOfFiles(-files.length);
-          template = fu._renderDownload(files)
-            .appendTo($('#fileupload .files'));
-          // Force reflow:
-          fu._reflow = fu._transition && template.length &&
-            template[0].offsetWidth;
-          template.addClass('in');
-          $('#loading').remove();
-        });
-
-    });
-</script>
