@@ -13,7 +13,25 @@
 {% for (var i=0, file; file=o.files[i]; i++) { %}
     <tr class="template-upload fade">
         <td class="preview"><span class="fade"></span></td>
-        <td class="name"><span>{%=file.name%}</span></td>
+        <td class="type">
+          <span>
+            <select id="product_item_type" name="product[item_type]" >
+              <option value="Armor:Head">Armor:Head</option>
+              <option value="Armor:Chest">Armor:Chest</option>
+              <option value="Armor:Legs">Armor:Legs</option>
+              <option value="Armor:Ring">Armor:Ring</option>
+              <option value="Armor:Amulet">Armor:Amulet</option>
+              <option value="Armor:Helm">Armor:Helm</option>
+              <option value="Armor:Bracers">Armor:Bracer</option>
+              <option value="Armor:Shoulder">Armor:Shoulder</option>
+              <option value="Armor:Wrist">Armor:Wrist</option>
+              <option value="Weapon:Bow">Weapon:Bow</option>
+              <option value="Weapon:Sword">Weapon:Sword</option>
+              <option value="Weapon:Wand">Weapon:Wand</option>
+            </select>
+          </span>
+        </td>
+        <td class="price"><span><input type="text" id="product_price" name="product[price]" class="input small" placeholder="price"></input></span> </td>
         <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
         {% if (file.error) { %}
             <td class="error" colspan="2"><span class="label label-important">{%=locale.fileupload.error%}</span> {%=locale.fileupload.errors[file.error] || file.error%}</td>
@@ -39,6 +57,7 @@
     </tr>
 {% } %}
 </script>
+
 <!-- The template to display files available for download -->
 <script id="template-download" type="text/x-tmpl">
 {% for (var i=0, file; file=o.files[i]; i++) { %}
@@ -46,18 +65,18 @@
         {% if (file.error) { %}
             <td></td>
             <td class="name"><span>{%=file.name%}</span></td>
-            <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
+            <td class="size"><span>{%=file.price%}</span></td>
             <td class="error" colspan="2"><span class="label label-important">{%=locale.fileupload.error%}</span> {%=locale.fileupload.errors[file.error] || file.error%}</td>
         {% } else { %}
             <td class="preview">{% if (file.thumbnail_url) { %}
                 <a href="{%=file.url%}" title="{%=file.name%}" rel="gallery" download="{%=file.name%}"><img src="{%=file.thumbnail_url%}"></a>
             {% } %}</td>
-            <td class="name">
-                <a href="{%=file.url%}" title="{%=file.name%}" rel="{%=file.thumbnail_url&&'gallery'%}" download="{%=file.name%}">{%=file.name%}</a>
-            </td>
-            <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
-            <td colspan="2"></td>
+            <td><span>{%= file.item_type %}</span></td>
+            <td class="price"><span>Selling for {%=file.price%}</span> </td>
+            <td><a href="" class="btn">Bnet:cake#1234<a></td>
+            <td><a href="fb" class="btn btn-primary">FB:Buddy Magsipoc</a></td>
         {% } %}
+        <td></td>
         <td class="delete">
             <button class="btn btn-danger" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}">
                 <i class="icon-trash icon-white"></i>
@@ -69,7 +88,6 @@
 {% } %}
 </script>
 
-
 <!-- The Templates and Load Image plugins are included for the FileUpload user interface -->
 <script src="http://blueimp.github.com/JavaScript-Templates/tmpl.min.js"></script>
 <script src="http://blueimp.github.com/JavaScript-Load-Image/load-image.min.js"></script>
@@ -79,26 +97,4 @@
 <%= javascript_include_tag 'drag_drop_upload/jquery.fileupload-ui.js' %>
 <%= javascript_include_tag 'drag_drop_upload/bootstrap-image-gallery' %>
 <!-- add include_tag js files to config.assets.precompile in ...environments/production.rb if you have it in vendor/ assets -->
-
-<script type="text/javascript" charset="utf-8">
-    $(function () {
-        // Initialize the jQuery File Upload widget:
-        $('#fileupload').fileupload();
-        // 
-        // Load existing files:
-        $.getJSON($('#fileupload').prop('action'), function (files) {
-          var fu = $('#fileupload').data('fileupload'), 
-            template;
-          fu._adjustMaxNumberOfFiles(-files.length);
-          template = fu._renderDownload(files)
-            .appendTo($('#fileupload .files'));
-          // Force reflow:
-          fu._reflow = fu._transition && template.length &&
-            template[0].offsetWidth;
-          template.addClass('in');
-          $('#loading').remove();
-        });
-
-    });
-</script>
 

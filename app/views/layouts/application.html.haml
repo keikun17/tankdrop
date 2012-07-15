@@ -28,24 +28,26 @@
           %a.brand(href="#") Tankdrop
           .container.nav-collapse
             %ul.nav
-              %li= link_to "Link 1", "/path1"
-              %li= link_to "Link 2", "/path2"
-              %li= link_to "Link 3", "/path3"
-
+              %li= link_to "About", "/path1"
+              %li= link_to "PH Item Sellers Community", "/path2"
+              %li= link_to "DiabloPH", "/path3"
+            .div.pull-right
+              %form.navbar-search
+                = text_field_tag "Search", '', :placeholder => "Minimum Budget", :class => "span2"
+                %select.span1
+                  %option
+                    Gold
+                  %option
+                    PHP
+              .nav
+                %button.btn Settings
+                %button.btn.btn-danger Logout Buddy Magsipoc
     .container
 
       .content
         .row
-          .span9
+          .span12
             = yield
-          .span3
-            .well.sidebar-nav
-              %h3 Sidebar
-              %ul.nav.nav-list
-                %li.nav-header Sidebar
-                %li= link_to "Link 1", "/path1"
-                %li= link_to "Link 2", "/path2"
-                %li= link_to "Link 3", "/path3"
     
       %footer
         %p &copy; Nuked Apps 2012

@@ -5,13 +5,8 @@
 <% content_for(:footer) do %>
   <%= render 'footer_js' %>
 <% end %>
-
-<div class="page-header">
-  <h2><%= t('sell_that_thing') %></h2>
-</div>
-
 <blockquote>
-  <p>Test</p>
+  <p>Tip of the day : Drag screenshots of your D3 items on this page or click on the "Add files" button.</p>
 </blockquote>
 <%= form_for Product.new, :html => { :multipart => true, :id => "fileupload"  } do |f| %>
         <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
@@ -20,7 +15,7 @@
                 <!-- The fileinput-button span is used to style the file input field as button -->
                 <span class="btn btn-success fileinput-button">
                     <i class="icon-plus icon-white"></i>
-                    <span>Add files...</span>
+                    <span>Add Images...</span>
                     <%= f.file_field :product_image %>
                 </span>
                 <button type="submit" class="btn btn-primary start">
@@ -83,4 +78,25 @@
         </a>
     </div>
 </div>
+<script type="text/javascript" charset="utf-8">
+    $(function () {
+        // Initialize the jQuery File Upload widget:
+        $('#fileupload').fileupload();
+        //
+        // Load existing files:
+        $.getJSON($('#fileupload').prop('action'), function (files) {
+          var fu = $('#fileupload').data('fileupload'),
+            template;
+          fu._adjustMaxNumberOfFiles(-files.length);
+          template = fu._renderDownload(files)
+            .appendTo($('#fileupload .files'));
+          // Force reflow:
+          fu._reflow = fu._transition && template.length &&
+            template[0].offsetWidth;
+          template.addClass('in');
+          $('#loading').remove();
+        });
+
+    });
+</script>
 
