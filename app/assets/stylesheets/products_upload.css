@@ -1,0 +1,5 @@
+/*
+ *= require_self
+ *= require_tree ./products
+ *= require ./products/upload/jquery.fileupload-ui.css
+ */

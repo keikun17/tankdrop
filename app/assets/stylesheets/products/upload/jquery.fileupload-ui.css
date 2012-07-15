@@ -36,6 +36,7 @@
 .files .progress {
   width: 200px;
 }
+/*[TODO] Find out where the progressbar.gif should be*/
 .progress-animated .bar {
   background: url(../img/progressbar.gif) !important;
   filter: none;

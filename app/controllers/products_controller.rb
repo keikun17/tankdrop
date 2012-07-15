@@ -9,6 +9,14 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.all
+    respond_with(@products) do |format|
+      format.html
+      format.json {render :json => @products.collect{|product| product.to_jquery_upload }.to_json }
+    end
+  end
+
+  def retrieve_products
+    @products = Product.all
     render :json => @products.collect{|product| product.to_jquery_upload }.to_json
   end
 
@@ -16,11 +24,6 @@ class ProductsController < ApplicationController
     
   end
 
-  #def create
-    #@product = Product.new(params[:product])
-    #@product.save
-    #respond_with @product
-  #end
   
   def create
     @product = Product.new(params[:product])
@@ -35,6 +38,8 @@ class ProductsController < ApplicationController
           render :json => [@product.to_jquery_upload].to_json			
         }
       end
+    else
+      render :json => [{:error => "unable to create image"}], :status => 304
     end
   end
 

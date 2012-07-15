@@ -1,0 +1,68 @@
+-#= content_for :head do
+  -#%link{rel: "stylesheet", href: "http://blueimp.github.com/cdn/css/bootstrap.min.css"}
+  -#/[if lt IE 7]
+    -#%link{rel: "stylesheet", href: "http://blueimp.github.com/cdn/css/bootstrap-ie6.min.css" }
+
+%blockquote
+.alert
+  %h4.alert-heading
+    Warning! :
+  %p
+    Tankdrop is just a site that helps sellers and buyers discuss and meet.
+    Tankdrop will not be responsible for what bad stuff may transpire during your transaction.
+
+.row
+  .span3
+    = link_to("Start Selling!", upload_products_path, class: "btn btn-large btn-success")
+
+%hr
+// modal-gallery is the modal dialog used for the image gallery
+#modal-gallery.modal.modal-gallery.hide.fade
+  .modal-header
+    %a.close{data: {dismiss: "modal"}}
+      &times;
+    %h3.modal-title Some Modal Title Here
+  .modal-body
+    .modal-image
+  .modal-footer
+    %a.btn.btn-primary.modal-next 
+      Next
+      %i.icon-arrow-right.icon-white
+    %a.btn.btn-info.modal-prev
+      %i.icon-arrow-left.icon-white
+      Previous
+    %a.btn.btn-success.modal-play.modal-slideshow{data: {slideshow: "5000"}}
+      %i.icon-play.icon-white
+      Slideshow
+    %a.btn.modal-download{target: "_blank"}
+      %i.icon-download
+      Download
+
+
+%script{src: "http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"}
+%script{src: "http://blueimp.github.com/cdn/js/bootstrap.min.js"}
+%script{src: "http://blueimp.github.com/JavaScript-Load-Image/load-image.min.js"}
+= javascript_include_tag 'drag_drop_upload/bootstrap-image-gallery'
+
+#gallery{data: {toggle: "modal-gallery", target:"#modal-gallery"}}
+  %ul.thumbnails
+    - @products.each do |product|
+      %li.span3
+        .thumbnail
+          = link_to(image_tag(product.product_image.url(:squared)), product.product_image.url, :title => "", rel: "gallery")
+          .caption
+            %h4
+              = product.price
+              Gold
+            %h4= product.item_type
+            %a.btn
+              %i.icon-comment
+              Comments (0) 
+            %hr
+            %h4 Seller Details
+            %p
+              Facebook :
+              %a Buddy Magsipoc
+            %p
+              Battletag :
+              %a cake#1234
