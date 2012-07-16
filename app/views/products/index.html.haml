@@ -11,9 +11,13 @@
     Tankdrop is just a site that helps sellers and buyers discuss and meet.
     Tankdrop will not be responsible for what bad stuff may transpire during your transaction.
 
+- if current_user
+  .row
+    %h2.span6
+      Welcome 
+      = current_user.name
 .row
-  .span3
-    = link_to("Start Selling!", upload_products_path, class: "btn btn-large btn-success")
+  .span2= link_to("Start Selling!", upload_products_path, class: "btn btn-large btn-success")
 
 %hr
 // modal-gallery is the modal dialog used for the image gallery

@@ -1,9 +1,15 @@
 Tankdrop::Application.routes.draw do
+  # Facebook Authentication
+  match 'auth/:provider/callback', to: 'sessions#create'
+  match 'auth/failure', to: redirect('/')
+  match 'signout', to: 'sessions#destroy', as: 'signout'
+
   resources :products do
     collection do
       get 'upload'
     end
   end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

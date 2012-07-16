@@ -25,7 +25,7 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          =link_to "TankDrop", root_path, :class => "brand"
+          = link_to "TankDrop", root_path, :class => "brand"
           .container.nav-collapse
             %ul.nav
               %li= link_to "About", "/path1"
@@ -43,7 +43,10 @@
                 %a.btn
                   %i.icon-cog
                   Settings
-                %button.btn.btn-danger Logout Buddy Magsipoc
+                - if current_user
+                  = link_to "Sign out", signout_path, id: "sign_out", :class => "btn btn-danger"
+                - else
+                  = link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in", :class => "btn btn-primary"
     .container
 
       .content

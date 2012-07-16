@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  provider: MyString
+  uid: MyString
+  name: MyString
+  oath_token: MyString
+  oath_expires_at: 2012-07-16 21:17:43
+  battletag_d3: MyString
+
+two:
+  provider: MyString
+  uid: MyString
+  name: MyString
+  oath_token: MyString
+  oath_expires_at: 2012-07-16 21:17:43
+  battletag_d3: MyString

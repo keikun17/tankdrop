@@ -27,6 +27,9 @@ class ProductsController < ApplicationController
   
   def create
     @product = Product.new(params[:product])
+    if current_user
+      @product.user = current_user 
+    end
     if @product.save
       respond_to do |format|
         format.html {  
