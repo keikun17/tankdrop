@@ -18,10 +18,10 @@ ActiveRecord::Schema.define(:version => 20120716144816) do
     t.string   "product_image"
     t.string   "price"
     t.string   "item_type"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.integer  "user_id"
-    t.string   "seller_identifier"
+    t.string   "seller_contact"
   end
 
   create_table "users", :force => true do |t|

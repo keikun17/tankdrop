@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
       user.uid = auth.uid
       user.name = auth.info.name
       user.image = auth.info.image
-      user.facebook_url = auth.info.urls.facebook
+      user.facebook_url = auth.info.urls.Facebook
       user.oath_token = auth.credentials.token
       user.oath_expires_at = Time.at(auth.credentials.expires_at)
       user.save!

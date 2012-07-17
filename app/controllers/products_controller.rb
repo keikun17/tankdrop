@@ -11,7 +11,10 @@ class ProductsController < ApplicationController
     @products = Product.all
     respond_with(@products) do |format|
       format.html
-      format.json {render :json => @products.collect{|product| product.to_jquery_upload }.to_json }
+      #[TODO] Refactor this method # split the concern for 
+      # 1. access on main page by a user (show all / normal cruddy stuff)
+      # 2. access by json from the product/upload page
+      format.json {render :json => current_user.products.collect{|product| product.to_jquery_upload }.to_json }
     end
   end
 

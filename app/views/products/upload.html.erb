@@ -9,31 +9,78 @@
 <blockquote>
   <p>Tip of the day : Drag screenshots of your D3 items on this page or click on the "Add files" button.</p>
 </blockquote>
+<div class="alert"
+  <h4 class="alert-heading">
+    Warning! :
+  </h4>
+  <p>
+    Post from unauthenticated users will remain for 2 days only
+  </p>
+</div>
+
 <%= form_for Product.new, :html => { :multipart => true, :id => "fileupload"  } do |f| %>
-        <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
-        <div class="row">
-          <div class="span3 input-prepend">
-            <span class="add-on">BattleTag</span>
-            <%= f.text_field :seller_identifier, :placeholder => "Battletag#Here", :id => "prependedInput", :class => "span2" %>
+        <% unless current_user %>
+          <div class="row">
+            <div class="span9">
+              <div class="input-prepend">
+                <span class="add-on">Contact Info</span>
+                <%= f.text_field :seller_contact,
+                  placeholder: "Required",
+                  id: "prependedInput",
+                  size: 16,
+                  data: {
+                    content: "Of course you need to tell your buyers how to contact you",
+                    title: "Hey!",
+                    placement: "bottom"
+                  } %>
+
+                Or 
+                <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in", :class => "btn btn-primary" %>
+              </div>
+            </div>
           </div>
-        </div>
+
+          <hr>
+          <script>
+
+            // Tell them leprechaun to say hello
+            $('input[name="product[seller_contact]"]').popover("show");
+
+            // Disable them submit buttons when the leprechaun hasn't introduced himself yet
+            $(document).ready(function(){
+              $('button[type="submit"]').attr('disabled','disabled');
+              $('input[name="product[seller_contact]"]').keyup(function(){
+                console.log('called');
+                console.log($(this).val());
+                if($(this).val().length > 0){
+                  $('input[name="product[seller_contact]"]').popover("hide");
+                  $('button[type="submit"]').removeAttr('disabled');
+                }else{
+                  $('input[name="product[seller_contact]"]').popover("show");
+                  $('button[type="submit"]').attr('disabled','disabled');
+                }
+
+              });
+            });
+          </script>
+
+        <% end %>
         <div class="row fileupload-buttonbar">
             <div class="span7">
-                <!-- The fileinput-button span is used to style the file input field as button -->
-                <span class="btn btn-success fileinput-button">
+                <span class="btn btn-large btn-success fileinput-button">
                     <i class="icon-plus icon-white"></i>
                     <span>Add Images...</span>
                     <%= f.file_field :product_image %>
                 </span>
-                <button type="submit" class="btn btn-primary start">
+                <button type="submit" class="btn btn-large btn-primary start">
                     <i class="icon-upload icon-white"></i>
                     <span>Start upload</span>
                 </button>
-                <button type="reset" class="btn btn-warning cancel">
+                <button type="reset" class="btn btn-large btn-warning cancel">
                     <i class="icon-ban-circle icon-white"></i>
                     <span>Cancel upload</span>
                 </button>
-                <button type="button" class="btn btn-danger delete">
+                <button type="button" class="btn btn-large btn-danger delete">
                     <i class="icon-trash icon-white"></i>
                     <span>Delete</span>
                 </button>
@@ -57,9 +104,6 @@
     <% end %>
 
 
-
-
-<!-- modal-gallery is the modal dialog used for the image gallery -->
 <div id="modal-gallery" class="modal modal-gallery hide fade" data-filter=":odd">
     <div class="modal-header">
         <a class="close" data-dismiss="modal">&times;</a>
@@ -90,19 +134,19 @@
         // Initialize the jQuery File Upload widget:
         $('#fileupload').fileupload();
         //
-        // Load existing files:
-        $.getJSON($('#fileupload').prop('action'), function (files) {
-          var fu = $('#fileupload').data('fileupload'),
-            template;
-          fu._adjustMaxNumberOfFiles(-files.length);
-          template = fu._renderDownload(files)
-            .appendTo($('#fileupload .files'));
-          // Force reflow:
-          fu._reflow = fu._transition && template.length &&
-            template[0].offsetWidth;
-          template.addClass('in');
-          $('#loading').remove();
-        });
+
+//        // Load existing files:
+//        $.getJSON($('#fileupload').prop('action'), function (files) {
+//          var fu = $('#fileupload').data('fileupload'), template;
+//          fu._adjustMaxNumberOfFiles(-files.length);
+//          template = fu._renderDownload(files)
+//            .appendTo($('#fileupload .files'));
+//          // Force reflow:
+//          fu._reflow = fu._transition && template.length &&
+//            template[0].offsetWidth;
+//          template.addClass('in');
+//          $('#loading').remove();
+//        });
 
     });
 </script>

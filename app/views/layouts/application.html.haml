@@ -33,7 +33,11 @@
               %li= link_to "DiabloPH", "/path3"
             .div.pull-right
               %form.navbar-search
-                = text_field_tag "Search", '', :placeholder => "Minimum Budget", :class => "span2"
+                = text_field_tag "Search",
+                  '',
+                  placeholder: "Minimum Budget",
+                  class: "span2",
+                  disabled: "true"
                 %select.span1
                   %option
                     Gold
@@ -44,9 +48,9 @@
                   %i.icon-cog
                   Settings
                 - if current_user
-                  = link_to "Sign out", signout_path, id: "sign_out", :class => "btn btn-danger"
+                  = link_to "Sign out", signout_path, id: "sign_out", class: "btn btn-danger"
                 - else
-                  = link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in", :class => "btn btn-primary"
+                  = link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in", class: "btn btn-primary"
     .container
 
       .content

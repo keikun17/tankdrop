@@ -3,8 +3,8 @@ class Product < ActiveRecord::Base
   mount_uploader :product_image, ProductImageUploader 
 
   belongs_to :user
-  validates :user_id, presence: true, if: "seller_identifier.blank?"
-  validates :seller_identifier, presence: true, if: "user_id.blank?"
+  validates :user_id, presence: true, if: "seller_contact.blank?"
+  validates :seller_contact, presence: true, if: "user_id.blank?"
 
   attr_accessible :name,
     :product_image,
@@ -12,7 +12,7 @@ class Product < ActiveRecord::Base
     :price,
     :path,
     :item_type,
-    :seller_identifier
+    :seller_contact
 
 
   def to_jquery_upload
@@ -25,15 +25,15 @@ class Product < ActiveRecord::Base
       thumbnail_url: product_image.thumb.url,
       delete_url: product_path(id: id),
       delete_type: "DELETE",
-      seller_identifier: seller_identifier
+      seller_contact: seller_contact
     }
   end
 
   def display_seller
     if self.user.present?
-      self.user.battletag_d3
+      self.user.name
     else
-      self.seller_identifier
+      self.seller_contact
     end
 
   end
