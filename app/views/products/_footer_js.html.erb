@@ -89,8 +89,8 @@
 </script>
 
 <!-- The Templates and Load Image plugins are included for the FileUpload user interface -->
-<script src="http://blueimp.github.com/JavaScript-Templates/tmpl.min.js"></script>
-<script src="http://blueimp.github.com/JavaScript-Load-Image/load-image.min.js"></script>
+<%= javascript_include_tag 'drag_drop_upload/tmpl.min.js' %>
+<%= javascript_include_tag 'drag_drop_upload/load-image.min.js '%>
 <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
 <%= javascript_include_tag 'drag_drop_upload/jquery.iframe-transport.js' %>
 <%= javascript_include_tag 'drag_drop_upload/jquery.fileupload.js' %>

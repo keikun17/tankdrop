@@ -11,6 +11,12 @@
 </blockquote>
 <%= form_for Product.new, :html => { :multipart => true, :id => "fileupload"  } do |f| %>
         <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+        <div class="row">
+          <div class="span3 input-prepend">
+            <span class="add-on">BattleTag</span>
+            <%= f.text_field :seller_identifier, :placeholder => "Battletag#Here", :id => "prependedInput", :class => "span2" %>
+          </div>
+        </div>
         <div class="row fileupload-buttonbar">
             <div class="span7">
                 <!-- The fileinput-button span is used to style the file input field as button -->
