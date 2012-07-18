@@ -52,9 +52,9 @@
               = product.price
               Gold
             %h4= product.item_type
-            %a.btn
+            = link_to product, class: "btn" do 
               %i.icon-comment
-              Comments (0) 
+              = "Comments (#{product.comments.count})"
             %hr
             %h4 Seller Details
             - if product.user

@@ -5,6 +5,9 @@ Tankdrop::Application.routes.draw do
   match 'signout', to: 'sessions#destroy', as: 'signout'
 
   resources :products do
+    member do
+      post 'comment'
+    end
     collection do
       get 'upload'
     end

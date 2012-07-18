@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/mickey/acts_as_commentable.git
+  revision: 024a489d954f119fffb02beb587745cd45776f54
+  branch: 4.0
+  specs:
+    acts_as_commentable (4.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -155,6 +162,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts_as_commentable!
   carrierwave
   coffee-rails (~> 3.2.1)
   haml

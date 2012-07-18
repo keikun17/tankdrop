@@ -1,6 +1,8 @@
 class Product < ActiveRecord::Base
   include Rails.application.routes.url_helpers
+
   mount_uploader :product_image, ProductImageUploader 
+  acts_as_commentable
 
   belongs_to :user
   validates :user_id, presence: true, if: "seller_contact.blank?"

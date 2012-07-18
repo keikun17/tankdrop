@@ -4,11 +4,13 @@ class ProductsController < ApplicationController
 
   def new
     @product = Product.new
+
     respond_with @product
   end
 
   def index
     @products = Product.all
+
     respond_with(@products) do |format|
       format.html
       #[TODO] Refactor this method # split the concern for 
@@ -20,6 +22,7 @@ class ProductsController < ApplicationController
 
   def retrieve_products
     @products = Product.all
+
     render :json => @products.collect{|product| product.to_jquery_upload }.to_json
   end
 
@@ -30,9 +33,11 @@ class ProductsController < ApplicationController
   
   def create
     @product = Product.new(params[:product])
+
     if current_user
       @product.user = current_user 
     end
+
     if @product.save
       respond_to do |format|
         format.html {  
@@ -49,14 +54,34 @@ class ProductsController < ApplicationController
     end
   end
 
-    def destroy
-      @product = Product.find(params[:id])
-      @product.destroy
-      render :json => true
-    end
-
-    def show
+  def comment
     @product = Product.find(params[:id])
+
+    @comment = @product.comments.new(params[:comment])
+    @comment.user = current_user if current_user
+
+    if @comment.save
+      redirect_to product_path(@product)
+    else
+      render 'comment'
+    end
+  end
+
+  def destroy
+    @product = Product.find(params[:id])
+    @product.destroy
+
+    render :json => true
+  end
+
+  def show
+    @product = Product.find(params[:id])
+
+    if current_user
+      @comment = @product.comments.new(user: current_user)
+    else
+      @comment = @product.comments.new
+    end
   end
 
 end
