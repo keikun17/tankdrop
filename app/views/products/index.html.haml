@@ -41,13 +41,16 @@
 = javascript_include_tag 'drag_drop_upload/load-image.min.js'
 = javascript_include_tag 'drag_drop_upload/bootstrap-image-gallery'
 
+= will_paginate(@products, :renderer => BootstrapPagination::Rails)
 #gallery{data: {toggle: "modal-gallery", target:"#modal-gallery"}}
   %ul.thumbnails
     - @products.each do |product|
       %li.span3
         .thumbnail
-          = link_to(image_tag(product.product_image.url(:squared)), product.product_image.url, :title => "", rel: "gallery")
+          = link_to(image_tag(product.product_image.url(:squared)), product.product_image.url, :title => product.title, rel: "gallery")
           .caption
+            %h4
+              = product.title
             %h4
               %i.icon-tag
               = product.price
@@ -56,10 +59,12 @@
               %i.icon-comment
               = "Comments (#{product.comments.count})"
             %hr
-            %h4 Seller Details
             - if product.user
               %i.icon-facebook-sign
               = link_to product.user.name, product.user.facebook_url
             - else
               %i.icon-user 
               = product.seller_contact
+
+.form-actions
+  = will_paginate(@products, :renderer => BootstrapPagination::Rails)

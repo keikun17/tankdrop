@@ -9,8 +9,13 @@ class ProductsController < ApplicationController
   end
 
   def index
-    @products = Product.all
-
+    if params[:search]
+      @products = Product.where("price <= ?", params[:search])
+      @products = @products.paginate(per_page: 16, page: params[:page])
+      @products = @products.order("price desc")
+    else
+      @products = Product.paginate(per_page: 16, page: params[:page]).sort_by_bump 
+    end
     respond_with(@products) do |format|
       format.html
       #[TODO] Refactor this method # split the concern for 

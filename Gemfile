@@ -15,6 +15,10 @@ gem 'haml-rails'
 
 gem 'omniauth-facebook'
 gem 'acts_as_commentable', git: 'git://github.com/mickey/acts_as_commentable.git', branch: '4.0'
+gem 'will_paginate'
+gem 'will_paginate-bootstrap'
+
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

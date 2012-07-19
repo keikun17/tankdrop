@@ -1,44 +1,50 @@
 .span7
-  %h1 Product Page
-
-  %p
-    Product name
-    = @product.name
+  %h2
+    = @product.title
 
   %p
     = image_tag(@product.product_image) if @product.product_image
 
-  %p
+  %h3
+    - if @product.user
+      %i.icon-facebook-sign
+      = link_to @product.user.name, @product.user.facebook_url
+    - else
+      %i.icon-user 
+      = @product.seller_contact
+
+  %h3
     %i.icon-tag
     = @product.price
     Gold
+
   %hr
-    - @product.comments.each do |comment|
-      %blockquote
-        %p
-          = comment.comment
-        %small
-          - if comment.user
-            %i.icon-facebook-sign
-          - else
-            %i.icon-user
-          = comment.display_user
-          - if comment.user and @product.user and comment.user == @product.user
-            %span.label.label-info
-              I'm the seller 
+  - @product.comments.each do |comment|
+    %blockquote
+      %p
+        = comment.comment
+      %small
+        - if comment.user
+          %i.icon-facebook-sign
+        - else
+          %i.icon-user
+        = comment.display_user
+        - if comment.user and @product.user and comment.user == @product.user
+          %span.label.label-info
+            I'm the seller 
 
-    = form_for @comment, url: comment_product_path(@product) do |f|
-      - unless current_user
-        .control-group
-          = f.label :name, :for => :visitor_name, :class => 'control-label'
-          .controls
-            = f.text_field :visitor_name, :rows => 3
+  = form_for @comment, url: comment_product_path(@product) do |f|
+    - unless current_user
       .control-group
-        = f.label :comment, :class => 'control-label'
+        = f.label :name, :for => :comment_visitor_name, :class => 'control-label'
         .controls
-          = f.text_area :comment, :rows => 3
+          = f.text_field :visitor_name
+    .control-group
+      = f.label :comment, :class => 'control-label'
+      .controls
+        = f.text_area :comment, :rows => 3
 
-      = f.submit "Comment"
+    = f.submit "Comment"
 
 
 

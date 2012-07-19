@@ -33,20 +33,16 @@
               %li= link_to "DiabloPH", "/path3"
             .div.pull-right
               %form.navbar-search
-                = text_field_tag "Search",
+                = text_field_tag "search",
                   '',
-                  placeholder: "Minimum Budget",
-                  class: "span2",
-                  disabled: "true"
+                  placeholder: "Max Budget",
+                  class: "span2"
                 %select.span1
                   %option
                     Gold
                   %option
                     PHP
               .nav
-                %a.btn
-                  %i.icon-cog
-                  Settings
                 - if current_user
                   = link_to "Sign out", signout_path, id: "sign_out", class: "btn btn-danger"
                 - else

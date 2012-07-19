@@ -8,13 +8,16 @@ class Product < ActiveRecord::Base
   validates :user_id, presence: true, if: "seller_contact.blank?"
   validates :seller_contact, presence: true, if: "user_id.blank?"
 
+  scope :sort_by_bump, order: "updated_at desc"
+
   attr_accessible :name,
     :product_image,
     :product_image_cache,
     :price,
     :path,
     :item_type,
-    :seller_contact
+    :seller_contact,
+    :title
 
 
   def to_jquery_upload
@@ -27,7 +30,8 @@ class Product < ActiveRecord::Base
       thumbnail_url: product_image.thumb.url,
       delete_url: product_path(id: id),
       delete_type: "DELETE",
-      seller_contact: seller_contact
+      seller_contact: seller_contact,
+      title: title
     }
   end
 

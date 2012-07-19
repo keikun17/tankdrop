@@ -30,9 +30,10 @@ ActiveRecord::Schema.define(:version => 20120718135410) do
   add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
 
   create_table "products", :force => true do |t|
+    t.string   "title"
     t.string   "name"
     t.string   "product_image"
-    t.string   "price"
+    t.integer  "price"
     t.string   "item_type"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false

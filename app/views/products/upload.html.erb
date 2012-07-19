@@ -50,8 +50,6 @@
             $(document).ready(function(){
               $('button[type="submit"]').attr('disabled','disabled');
               $('input[name="product[seller_contact]"]').keyup(function(){
-                console.log('called');
-                console.log($(this).val());
                 if($(this).val().length > 0){
                   $('input[name="product[seller_contact]"]').popover("hide");
                   $('button[type="submit"]').removeAttr('disabled');
