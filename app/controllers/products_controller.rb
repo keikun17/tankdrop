@@ -35,7 +35,7 @@ class ProductsController < ApplicationController
     @product = Product.new(params[:product])
 
     if current_user
-      @product.user = current_user 
+      @product.user = current_user
     end
 
     if @product.save
@@ -78,9 +78,9 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
 
     if current_user
-      @comment = @product.comments.new(user: current_user)
+      @comment = Comment.new(user: current_user)
     else
-      @comment = @product.comments.new
+      @comment = Comment.new
     end
   end
 

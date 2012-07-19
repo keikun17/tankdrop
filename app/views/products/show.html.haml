@@ -1,25 +1,44 @@
-%h1 Product Page
+.span7
+  %h1 Product Page
 
-%p
-  Product name
-  = @product.name
+  %p
+    Product name
+    = @product.name
 
-%p
-  = image_tag(@product.product_image) if @product.product_image
+  %p
+    = image_tag(@product.product_image) if @product.product_image
 
-%p
-  Product price
-  = @product.price
-%hr
-  - @product.comments.each do |comment|
-    %p
-      = comment.title
-%p
-  = form_for @comment, url: comment_product_path(@product) do |f|
-    = f.label :title
-    = f.text_field :title
+  %p
+    %i.icon-tag
+    = @product.price
+    Gold
+  %hr
+    - @product.comments.each do |comment|
+      %blockquote
+        %p
+          = comment.comment
+        %small
+          - if comment.user
+            %i.icon-facebook-sign
+          - else
+            %i.icon-user
+          = comment.display_user
+          - if comment.user and @product.user and comment.user == @product.user
+            %span.label.label-info
+              I'm the seller 
 
-    = f.submit "Comment"
+    = form_for @comment, url: comment_product_path(@product) do |f|
+      - unless current_user
+        .control-group
+          = f.label :name, :for => :visitor_name, :class => 'control-label'
+          .controls
+            = f.text_field :visitor_name, :rows => 3
+      .control-group
+        = f.label :comment, :class => 'control-label'
+        .controls
+          = f.text_area :comment, :rows => 3
+
+      = f.submit "Comment"
 
 
 

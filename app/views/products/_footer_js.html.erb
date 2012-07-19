@@ -25,24 +25,6 @@
   %}
     <tr class="template-upload fade">
         <td class="preview"><span class="fade"></span></td>
-        <td class="type">
-          <span>
-            <select id="product_item_type" name="product[item_type]" >
-              <option value="Armor:Head">Armor:Head</option>
-              <option value="Armor:Chest">Armor:Chest</option>
-              <option value="Armor:Legs">Armor:Legs</option>
-              <option value="Armor:Ring">Armor:Ring</option>
-              <option value="Armor:Amulet">Armor:Amulet</option>
-              <option value="Armor:Helm">Armor:Helm</option>
-              <option value="Armor:Bracers">Armor:Bracer</option>
-              <option value="Armor:Shoulder">Armor:Shoulder</option>
-              <option value="Armor:Wrist">Armor:Wrist</option>
-              <option value="Weapon:Bow">Weapon:Bow</option>
-              <option value="Weapon:Sword">Weapon:Sword</option>
-              <option value="Weapon:Wand">Weapon:Wand</option>
-            </select>
-          </span>
-        </td>
         <td class="price"><span><input type="text" id="product_price" name="product[price]" class="input small" placeholder="price"></input></span> </td>
         <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
       {% if (file.error) { %}
@@ -83,10 +65,7 @@
             <td class="preview">{% if (file.thumbnail_url) { %}
                 <a href="{%=file.url%}" title="{%=file.name%}" rel="gallery" download="{%=file.name%}"><img src="{%=file.thumbnail_url%}"></a>
             {% } %}</td>
-            <td><span>{%= file.item_type %}</span></td>
             <td class="price"><span>Selling for {%=file.price%}</span> </td>
-            <td><a href="" class="btn">Contact Info:{%= file.display_seller %}<a></td>
-                <td><a href="fb" class="btn btn-primary">FB:{%= file.display_seller %}</a></td>
         {% } %}
         <td></td>
         <td class="delete">
