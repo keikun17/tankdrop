@@ -10,11 +10,8 @@
   <p>Tip of the day : Drag screenshots of your D3 items on this page or click on the "Add files" button.</p>
 </blockquote>
 <div class="alert"
-  <h4 class="alert-heading">
-    Warning! :
-  </h4>
   <p>
-    Post from unauthenticated users will remain for 2 days only
+    During the Beta, Products uploaded by users that are not logged in are locked after 2 days and deleted after 7 days 
   </p>
 </div>
 
@@ -22,7 +19,7 @@
         <% unless current_user %>
           <div class="row">
             <div class="span9">
-              <div class="input-prepend">
+              <div class="control-group error input-prepend ">
                 <span class="add-on">Contact Info</span>
                 <%= f.text_field :seller_contact,
                   placeholder: "Required",
@@ -48,12 +45,15 @@
 
             // Disable them submit buttons when the leprechaun hasn't introduced himself yet
             $(document).ready(function(){
+              $('input[name="product[seller_contact]"]').parent().addClass('error');
               $('button[type="submit"]').attr('disabled','disabled');
               $('input[name="product[seller_contact]"]').keyup(function(){
                 if($(this).val().length > 0){
+                  $('input[name="product[seller_contact]"]').parent().removeClass('error');
                   $('input[name="product[seller_contact]"]').popover("hide");
                   $('button[type="submit"]').removeAttr('disabled');
                 }else{
+                  $('input[name="product[seller_contact]"]').parent().addClass('error');
                   $('input[name="product[seller_contact]"]').popover("show");
                   $('button[type="submit"]').attr('disabled','disabled');
                 }
@@ -67,7 +67,7 @@
             <div class="span7">
                 <span class="btn btn-large btn-success fileinput-button">
                     <i class="icon-plus icon-white"></i>
-                    <span>Add Images...</span>
+                    <span>Add Item Screenshot</span>
                     <%= f.file_field :product_image %>
                 </span>
                 <button type="submit" class="btn btn-large btn-primary start">
@@ -129,23 +129,7 @@
 </div>
 <script type="text/javascript" charset="utf-8">
     $(function () {
-        // Initialize the jQuery File Upload widget:
         $('#fileupload').fileupload();
-        //
-
-//        // Load existing files:
-//        $.getJSON($('#fileupload').prop('action'), function (files) {
-//          var fu = $('#fileupload').data('fileupload'), template;
-//          fu._adjustMaxNumberOfFiles(-files.length);
-//          template = fu._renderDownload(files)
-//            .appendTo($('#fileupload .files'));
-//          // Force reflow:
-//          fu._reflow = fu._transition && template.length &&
-//            template[0].offsetWidth;
-//          template.addClass('in');
-//          $('#loading').remove();
-//        });
-
     });
 </script>
 
