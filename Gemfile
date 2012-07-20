@@ -18,6 +18,8 @@ gem 'acts_as_commentable', git: 'git://github.com/mickey/acts_as_commentable.git
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
 
+gem 'capistrano'
+gem 'rvm-capistrano'
 
 # Gems used only for assets and not required
 # in production environments by default.
