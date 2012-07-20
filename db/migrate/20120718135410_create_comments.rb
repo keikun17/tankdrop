@@ -7,6 +7,7 @@ class CreateComments < ActiveRecord::Migration
       t.references :user
       t.string :visitor_name
       t.string :role, :default => "comments"
+      t.integer :bid_amount
       t.timestamps
     end
 

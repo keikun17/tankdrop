@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20120718135410) do
     t.integer  "user_id"
     t.string   "visitor_name"
     t.string   "role",                           :default => "comments"
+    t.integer  "bid_amount"
     t.datetime "created_at",                                             :null => false
     t.datetime "updated_at",                                             :null => false
   end

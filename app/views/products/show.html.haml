@@ -18,20 +18,24 @@
     = @product.price
     Gold
 
+  .control-group
+    .controls
+      .input-prepend
+        %span.add-on.icon-share 
+        %input.span4.uneditable-input.input-xlarge{value: "#{product_url(@product)}"}
+
+
   %hr
   - @product.comments.each do |comment|
     %blockquote
       %p
         = comment.comment
       %small
-        - if comment.user
-          %i.icon-facebook-sign
-        - else
-          %i.icon-user
-        = comment.display_user
+        = display_commenter(comment) 
+        = display_bid(comment)
         - if comment.user and @product.user and comment.user == @product.user
           %span.label.label-info
-            I'm the seller 
+            I'm the seller
 
   = form_for @comment, url: comment_product_path(@product) do |f|
     - unless current_user
@@ -43,7 +47,11 @@
       = f.label :comment, :class => 'control-label'
       .controls
         = f.text_area :comment, :rows => 3
-
+    - unless current_user
+      .control-group
+        = f.label :bid_amount, :class => 'control-label'
+        .controls
+          = f.text_field :bid_amount
     = f.submit "Comment"
 
 

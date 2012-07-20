@@ -7,13 +7,15 @@
   <%= render 'footer_js' %>
 <% end %>
 <blockquote>
-  <p>Tip of the day : Drag screenshots of your D3 items on this page or click on the "Add files" button.</p>
+  <p>Drag screenshots of your D3 items on this page or click on the "Add files" button to select them manually.</p>
 </blockquote>
-<div class="alert"
-  <p>
-    During the Beta, Products uploaded by users that are not logged in are locked after 2 days and deleted after 7 days 
-  </p>
-</div>
+<% unless current_user %>
+  <div class="alert">
+    <p>
+      During the Beta, Items uploaded by users that are not logged in are locked after 7 days and deleted after 30 days 
+    </p>
+  </div>
+<% end %>
 
 <%= form_for Product.new, :html => { :multipart => true, :id => "fileupload"  } do |f| %>
         <% unless current_user %>
@@ -26,8 +28,8 @@
                   id: "prependedInput",
                   size: 16,
                   data: {
-                    content: "Of course you need to tell your buyers how to contact you",
-                    title: "Hey!",
+                    content: "Tell your buyers how to contact you",
+                    title: "Greetings, Stranger!",
                     placement: "bottom"
                   } %>
 

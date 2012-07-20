@@ -28,20 +28,25 @@
           = link_to "TankDrop", root_path, :class => "brand"
           .container.nav-collapse
             %ul.nav
-              %li= link_to "About", "/path1"
-              %li= link_to "PH Item Sellers Community", "/path2"
-              %li= link_to "DiabloPH", "/path3"
+              %li.divider-vertical
+              %li
+                = link_to beta_faq_path do
+                  %i.icon-asterisk{:style => "color:yellow"}
+                  "What's in the Beta!"
+              %li.divider-vertical
             .div.pull-right
               %form.navbar-search
                 = text_field_tag "search",
                   '',
                   placeholder: "Max Budget",
-                  class: "span2"
+                  class: "search-query span2"
                 %select.span1
                   %option
                     Gold
-                  %option
-                    PHP
+                  %option{:disabled => 'disabled'}
+                    PHP (soon)
+                  %option{:disabled => 'disabled'}
+                    USD (soon)
               .nav
                 - if current_user
                   = link_to "Sign out", signout_path, id: "sign_out", class: "btn btn-danger"

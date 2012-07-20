@@ -1,11 +1,12 @@
 class Comment < ActiveRecord::Base
 
-  attr_accessible :title, :comment, :visitor_name, :user
+  attr_accessible :title, :comment, :visitor_name, :user, :bid_amount
 
   include ActsAsCommentable::Comment
 
-  belongs_to :commentable, :polymorphic => true, :touch => true
+  belongs_to :commentable, polymorphic: true, touch: true
 
+  scope :with_bid, lambda{ where("bid_amount is not null").order("bid_amount desc")}
   default_scope -> { order('created_at ASC') }
 
   # NOTE: install the acts_as_votable plugin if you

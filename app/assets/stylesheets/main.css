@@ -1,3 +1,8 @@
 div.thumbnail{
-  height: 345px;
+  height: 400px;
+  background-color:whitesmoke;
+}
+
+div.thumbnail div.progress{
+  margin-bottom: 0px!important;
 }

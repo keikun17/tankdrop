@@ -1,70 +1,67 @@
-%blockquote
-.alert
-  %h4.alert-heading
-    Warning! :
-  %p
-    Tankdrop is just a site that helps sellers and buyers discuss and meet.
-    Tankdrop will not be responsible for what bad stuff may transpire during your transaction.
-
-- if current_user
+.well
   .row
-    %h2.span6
-      Welcome 
-      = current_user.name
-.row
-  .span2= link_to("Start Selling!", upload_products_path, class: "btn btn-large btn-success")
+    %h3.span6
+      - if current_user
+        Welcome 
+        = current_user.name
+      - else
+        %blockquote
+          %em ... The only good demon is a dead one, I say.
+          %em By the way, did you happen to find anything in that cave you'd like to sell?"
+          %small Gheed
+
+  .row
+    .span2= link_to("Start Selling!", upload_products_path, class: "btn btn-large btn-success")
 
 %hr
-// modal-gallery is the modal dialog used for the image gallery
-#modal-gallery.modal.modal-gallery.hide.fade
-  .modal-header
-    %a.close{data: {dismiss: "modal"}}
-      &times;
-    %h3.modal-title Some Modal Title Here
-  .modal-body
-    .modal-image
-  .modal-footer
-    %a.btn.btn-primary.modal-next 
-      Next
-      %i.icon-arrow-right.icon-white
-    %a.btn.btn-info.modal-prev
-      %i.icon-arrow-left.icon-white
-      Previous
-    %a.btn.btn-success.modal-play.modal-slideshow{data: {slideshow: "5000"}}
-      %i.icon-play.icon-white
-      Slideshow
-    %a.btn.modal-download{target: "_blank"}
-      %i.icon-download
-      Download
 
+.row
+  .span7
+    .alert
+      %h4.alert-heading
+        Be careful :
+      %p
+        Tankdrop is just a site that helps sellers and buyers discuss and meet.
+        Tankdrop will not be responsible for anything nasty that may happen during your transactions.
 
-= javascript_include_tag 'drag_drop_upload/load-image.min.js'
-= javascript_include_tag 'drag_drop_upload/bootstrap-image-gallery'
+.row
+  .span12
 
-= will_paginate(@products, :renderer => BootstrapPagination::Rails)
-#gallery{data: {toggle: "modal-gallery", target:"#modal-gallery"}}
-  %ul.thumbnails
-    - @products.each do |product|
-      %li.span3
-        .thumbnail
-          = link_to(image_tag(product.product_image.url(:squared)), product.product_image.url, :title => product.title, rel: "gallery")
-          .caption
-            %h4
-              = product.title
-            %h4
-              %i.icon-tag
-              = product.price
-              Gold
-            = link_to product, class: "btn" do 
-              %i.icon-comment
-              = "Comments (#{product.comments.count})"
-            %hr
-            - if product.user
-              %i.icon-facebook-sign
-              = link_to product.user.name, product.user.facebook_url
-            - else
-              %i.icon-user 
-              = product.seller_contact
+    = javascript_include_tag 'drag_drop_upload/load-image.min.js'
+    = javascript_include_tag 'drag_drop_upload/bootstrap-image-gallery'
 
-.form-actions
-  = will_paginate(@products, :renderer => BootstrapPagination::Rails)
+    .row
+      .span4
+        = will_paginate(@products, :renderer => BootstrapPagination::Rails)
+      .span4.offset4
+        .pagination
+          <!-- here be sort options in the future -->
+
+    #gallery{data: {toggle: "modal-gallery", target:"#modal-gallery"}}
+      %ul.thumbnails
+        - @products.each do |product|
+          %li.span3
+            .thumbnail
+              = link_to(image_tag(product.product_image.url(:squared)), product, :title => product.title)
+              .progress.progress-warning.progress-striped.active
+                .bar{:style => "width:#{product.progress}%"}
+              .div
+                .caption
+                  %p
+                    %h4= display_title(product)
+                  %p
+                    %i.icon-tag
+                    = product.price
+                    Gold
+                  %p
+                    - if product.user
+                      %i.icon-facebook-sign
+                      = link_to product.user.name, product.user.facebook_url
+                    - else
+                      %i.icon-user 
+                      = product.seller_contact
+                  = link_to product, class: "btn" do 
+                    %i.icon-comment
+                    = "Comments (#{product.comments.count})"
+    .form-actions
+      = will_paginate(@products, :renderer => BootstrapPagination::Rails)

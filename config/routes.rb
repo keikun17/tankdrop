@@ -4,6 +4,8 @@ Tankdrop::Application.routes.draw do
   match 'auth/failure', to: redirect('/')
   match 'signout', to: 'sessions#destroy', as: 'signout'
 
+  match 'beta_faq', to: 'faqs#beta'
+
   resources :products do
     member do
       post 'comment'
