@@ -29,10 +29,11 @@ module ApplicationHelper
     html = ""
     if comment.user
       html = "<i class='icon-facebook-sign'></i>"
+      html = html + " " + link_to(comment.display_user, comment.user.facebook_url)
     else
       html = "<i class='icon-user' /></i>"
+      html = html + " " + comment.display_user
     end
-    html = html + " " + comment.display_user
     return raw(html)
   end
 
