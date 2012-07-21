@@ -24,7 +24,7 @@ class Product < ActiveRecord::Base
       name: read_attribute(:product_image),
       price: price,
       size: product_image.size,
-      url:  product_image.url,
+      url:  product_path(self),
       item_type: item_type,
       thumbnail_url: product_image.thumb.url,
       delete_url: product_path(id: id),

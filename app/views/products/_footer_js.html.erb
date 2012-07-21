@@ -93,7 +93,7 @@
             </td>
         {% } else { %}
             <td class="preview">{% if (file.thumbnail_url) { %}
-                <a href="{%=file.url%}" title="{%=file.name%}" rel="gallery" download="{%=file.name%}"><img src="{%=file.thumbnail_url%}"></a>
+                <a href="{%=file.url%}" title="{%=file.name%}" ><img src="{%=file.thumbnail_url%}"></a>
             {% } %}</td>
             <td class="title">
               <span>{%=file.title%}</span>
