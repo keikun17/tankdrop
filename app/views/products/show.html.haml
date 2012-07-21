@@ -47,11 +47,10 @@
       = f.label :comment, :class => 'control-label'
       .controls
         = f.text_area :comment, :rows => 3
-    - unless current_user
-      .control-group
-        = f.label :bid_amount, :class => 'control-label'
-        .controls
-          = f.text_field :bid_amount
+    .control-group
+      = f.label :bid_amount, :class => 'control-label'
+      .controls
+        = f.text_field :bid_amount
     = f.submit "Comment"
 
 

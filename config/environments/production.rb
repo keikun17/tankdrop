@@ -15,7 +15,8 @@ Tankdrop::Application.configure do
   config.assets.compress = true
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
-  config.assets.compile = false
+  # [TODO]  I just overrode this, Get this to work with a 'false' setting
+  config.assets.compile = true
 
   # Generate digests for assets URLs
   config.assets.digest = true
