@@ -21,7 +21,13 @@ class ProductsController < ApplicationController
       #[TODO] Refactor this method # split the concern for 
       # 1. access on main page by a user (show all / normal cruddy stuff)
       # 2. access by json from the product/upload page
-      format.json {render :json => current_user.products.collect{|product| product.to_jquery_upload }.to_json }
+      format.json do 
+        if current_user
+          render :json => current_user.products.collect{|product| product.to_jquery_upload }.to_json
+        else
+          render :json => [].to_json
+        end
+      end
     end
   end
 

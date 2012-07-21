@@ -47,7 +47,7 @@ class Product < ActiveRecord::Base
     bid_progress = "5"
     top_bid = comments.with_bid.first
 
-    if top_bid
+    if top_bid and self.price
       if top_bid.bid_amount > self.price
         bid_progress = "100%"
       else
