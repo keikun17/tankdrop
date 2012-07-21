@@ -13,6 +13,7 @@ set :scm, 'git'
 #role :db,  "your slave db-server here"
 
 set :rails_env, "production"
+default_run_options[:pty] = true
 
 task :production do
   set :branch, 'master'
@@ -28,7 +29,10 @@ set :deploy_via, :checkout
 
 namespace :symlink do
   task :db, :except => {:norelease => true} do
-    run "ln -nfs #{shared_path}/config/database.yml" "#{release_path}/config/database.yml" 
+    run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml" 
+  end
+  task :uploads, :except => {:norelease => true} do
+    run "ln -nfs #{shared_path}/uploads #{release_path}/public/uploads" 
   end
 end
 
@@ -39,10 +43,15 @@ end
 # these http://github.com/rails/irs_process_scripts
 
 # If you are using Passenger mod_rails uncomment this:
-# namespace :deploy do
-#   task :start do ; end
-#   task :stop do ; end
-#   task :restart, :roles => :app, :except => { :no_release => true } do
-#     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-#   end
-# end
+ namespace :deploy do
+   task :start do ; end
+   task :stop do ; end
+   task :restart, :roles => :app, :except => { :no_release => true } do
+     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
+   end
+ end
+#
+
+after "deploy:finalize_update", "symlink:db"
+after "deploy:finalize_update", "symlink:uploads"
+
