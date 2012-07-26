@@ -31,11 +31,8 @@
     = javascript_include_tag 'drag_drop_upload/bootstrap-image-gallery'
 
     .row
-      .span4
+      .span8
         = will_paginate(@products, :renderer => BootstrapPagination::Rails)
-      .span4.offset4
-        .pagination
-          <!-- here be sort options in the future -->
 
     #gallery{data: {toggle: "modal-gallery", target:"#modal-gallery"}}
       %ul.thumbnails
