@@ -51,6 +51,15 @@ Tankdrop::Application.configure do
   config.assets.precompile += %w(
     drag_drop_upload/load-image.min.js
     drag_drop_upload/bootstrap-image-gallery.js
+    drag_drop_upload/tmpl.min.js
+    drag_drop_upload/jquery.iframe-transport.js
+    drag_drop_upload/jquery.fileupload.js
+    drag_drop_upload/jquery.fileupload-ui.js
+    drag_drop_upload/bootstrap-image-gallery
+    products.js
+    drag_drop_upload.js
+
+    products_upload.css
   )
 
   # Disable delivery errors, bad email addresses will be ignored
