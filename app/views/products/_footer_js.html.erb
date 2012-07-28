@@ -74,6 +74,25 @@
       {% } %}</td>
   </tr>
 {% } %}
+
+
+
+</script>
+
+<!-- send other form data on submit-->
+<script>
+  $('#fileupload').bind('fileuploadsubmit', function (e, data) {
+    var inputs = data.context.find(':input');
+
+    seller_info = $('input[name="product[seller_contact]"]');
+
+    if (inputs.filter('[required][value=""]').first().focus().length) {
+      return false;
+    }
+
+    data.formData = inputs.serializeArray();
+    data.formData = data.formData.concat(seller_info.serializeArray());
+  });
 </script>
 
 <!-- The template to display files available for download -->

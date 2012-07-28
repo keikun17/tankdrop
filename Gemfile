@@ -47,5 +47,7 @@ gem 'jquery-rails'
 # Deploy with Capistrano
 # gem 'capistrano'
 
-# To use debugger
-gem 'pry'
+group :development, :test do
+  gem 'pry'
+  gem 'pry-nav'
+end

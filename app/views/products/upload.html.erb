@@ -17,7 +17,7 @@
   </div>
 <% end %>
 
-<%= form_for Product.new, :html => { :multipart => true, :id => "fileupload"  } do |f| %>
+<%= form_for :product, :url => products_path, :html => { :multipart => true, :id => "fileupload"  } do |f| %>
         <% unless current_user %>
           <div class="row">
             <div class="span9">

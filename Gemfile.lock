@@ -119,6 +119,8 @@ GEM
       coderay (~> 1.0.5)
       method_source (~> 0.7.1)
       slop (>= 2.4.4, < 3)
+    pry-nav (0.2.1)
+      pry (~> 0.9.9)
     rack (1.4.1)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -191,6 +193,7 @@ DEPENDENCIES
   mysql2
   omniauth-facebook
   pry
+  pry-nav
   rails (= 3.2.6)
   rmagick
   rvm-capistrano
