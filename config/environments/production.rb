@@ -16,7 +16,7 @@ Tankdrop::Application.configure do
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
   # [TODO]  I just overrode this, Get this to work with a 'false' setting
-  config.assets.compile = true
+  config.assets.compile = false
 
   # Generate digests for assets URLs
   config.assets.digest = true
@@ -47,7 +47,11 @@ Tankdrop::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  # config.assets.precompile += %w( search.js )
+
+  config.assets.precompile += %w(
+    drag_drop_upload/load-image.min.js
+    drag_drop_upload/bootstrap-image-gallery.js
+  )
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
