@@ -8,13 +8,13 @@ module ApplicationHelper
     return price
   end
 
-  def display_title(product)
+  def display_title(product, options = {})
     unless product.title.blank?
       title = product.title
     else
       title = "Product ##{product.id}"
     end
-    return title
+    return truncate(title, length: options[:truncate].to_i, omission: "...")
   end
 
   def display_bid(comment)
