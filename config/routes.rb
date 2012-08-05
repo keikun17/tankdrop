@@ -6,6 +6,8 @@ Tankdrop::Application.routes.draw do
 
   match 'beta_faq', to: 'faqs#beta'
 
+  resources :stores
+
   resources :products do
     member do
       post 'comment'
