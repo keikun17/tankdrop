@@ -1,18 +1,19 @@
-.well
-  .row
-    %h3.span9
-      - if current_user
-        Welcome 
-        = current_user.name
-      - else
-        %blockquote
-          %em ... The only good demon is a dead one, I say.
-          %em By the way, did you happen to find anything in that cave you'd like to sell?"
-          %small Gheed
+.row
+  %h2.span9
+    - if current_user
+      Welcome 
+      = current_user.name
+    - else
+      %blockquote
+        %em ... The only good demon is a dead one, I say.
+        %em By the way, did you happen to find anything in that cave you'd like to sell?"
+        %small Gheed
 
-  .row
-    .span2= link_to("Start Selling!", upload_products_path, class: "btn btn-large btn-success")
-
+.row
+  .span4
+    = link_to("Start Selling!", upload_products_path, class: "btn btn-large btn-success")
+    - if @current_user
+      = link_to("My Auctions (#{@current_user.products.count})", store_path(@current_user), class: "btn btn-large")
 %hr
 
 .row

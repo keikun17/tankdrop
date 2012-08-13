@@ -1,6 +1,13 @@
-%h1
-  Welcome to
-  = @user.name + "'s"
-  Store1
+.row
+  %h1.span9
+    Welcome to
+    = @user.name + "'s"
+    Store
 
+- if @current_user == @user
+  .alert.alert-info
+    This is your personal store page. You can share this page on your social network wall/feed so they can see the stuff you are selling
+.row
+  .span4
+    = link_to("Continue Selling", upload_products_path, class: "btn btn-large btn-success")
 = render 'products/products'

@@ -6,10 +6,18 @@
     = image_tag(@product.product_image) if @product.product_image
 
   %h3
-    - if @product.user
+    %i.icon-resize-full
+    = link_to "Full Image", @product.product_image.url
+
+  - if @product.user
+    %h3 
       %i.icon-facebook-sign
       = link_to @product.user.name, @product.user.facebook_url
-    - else
+    %h3
+      %i.icon-th-list
+      = link_to "View all seller's items", store_path(@product.user)
+  - else
+    %h3
       %i.icon-user 
       = @product.seller_contact
 
@@ -17,10 +25,6 @@
     %i.icon-tag
     = " #{@product.price}"
     Gold
-
-  %h3
-    %i.icon-resize-full
-    = link_to "Full Image", @product.product_image.url
 
   .control-group
     .controls
@@ -35,6 +39,7 @@
       %p
         = comment.comment
       %small
+        = comment.created_at.in_time_zone("Singapore")
         = display_commenter(comment) 
         = display_bid(comment)
         - if comment.user and @product.user and comment.user == @product.user

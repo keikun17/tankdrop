@@ -16,7 +16,7 @@
               .div
                 .caption
                   %p
-                    %h4= display_title(product, :truncate => '20')
+                    %h4= link_to display_title(product, :truncate => '20'), product_url(product)
                   %p
                     %i.icon-tag
                     = product.price
@@ -25,6 +25,8 @@
                     - if product.user
                       %i.icon-facebook-sign
                       = link_to product.user.name, product.user.facebook_url
+                      |
+                      = link_to "Seller page", store_path(product.user)
                     - else
                       %i.icon-user 
                       = product.seller_contact
