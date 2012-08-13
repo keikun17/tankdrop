@@ -24,41 +24,4 @@
         Tankdrop is just a site that helps sellers and buyers discuss and meet.
         Tankdrop will not be responsible for anything nasty that may happen during your transactions.
 
-.row
-  .span12
-
-    = javascript_include_tag 'drag_drop_upload/load-image.min.js'
-    = javascript_include_tag 'drag_drop_upload/bootstrap-image-gallery'
-
-    .row
-      .span8
-        = will_paginate(@products, :renderer => BootstrapPagination::Rails)
-
-    #gallery{data: {toggle: "modal-gallery", target:"#modal-gallery"}}
-      %ul.thumbnails
-        - @products.each do |product|
-          %li.span3
-            .thumbnail
-              = link_to(image_tag(product.product_image.url(:squared)), product, :title => product.title)
-              .progress.progress-warning.progress-striped.active
-                .bar{:style => "width:#{product.progress}%"}
-              .div
-                .caption
-                  %p
-                    %h4= display_title(product, :truncate => '20')
-                  %p
-                    %i.icon-tag
-                    = product.price
-                    Gold
-                  %p
-                    - if product.user
-                      %i.icon-facebook-sign
-                      = link_to product.user.name, product.user.facebook_url
-                    - else
-                      %i.icon-user 
-                      = product.seller_contact
-                  = link_to product, class: "btn" do 
-                    %i.icon-comment
-                    = "Comments (#{product.comments.count})"
-    .form-actions
-      = will_paginate(@products, :renderer => BootstrapPagination::Rails)
+= render 'products'

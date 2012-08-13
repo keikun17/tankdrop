@@ -4,7 +4,7 @@ class StoresController < ApplicationController
 
   def show
     @user = User.find params[:id]
-    @products = @user.products
+    @products = @user.products.paginate(per_page: 16, page: params[:page]).sort_by_bump
     respond_with @products
   end
 
