@@ -18,7 +18,7 @@
     %link(href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114")
     = yield :head
 
-    = render "shared/analytics" # if Rails.env.eql?("production")
+    = render "shared/analytics" if Rails.env.eql?("production")
   %body
     .navbar.navbar-fixed-top
       .navbar-inner
