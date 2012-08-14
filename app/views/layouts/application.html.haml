@@ -35,18 +35,9 @@
                   "What's in the Beta!"
               %li.divider-vertical
             .div.pull-right
-              %form.navbar-search
-                = text_field_tag "search",
-                  '',
-                  placeholder: "Max Budget",
-                  class: "search-query span2"
-                %select.span1
-                  %option
-                    Gold
-                  %option{:disabled => 'disabled'}
-                    PHP (soon)
-                  %option{:disabled => 'disabled'}
-                    USD (soon)
+              = form_tag products_path, method: 'get', class: "navbar-search" do
+                = text_field_tag "search", '', placeholder: "Max Budget", class: "search-query span2"
+                = select_tag "currency", options_for_select(["Gold", "PHP", "USD"]), class: "span1"
               .nav
                 - if current_user
                   = link_to "Sign out", signout_path, id: "sign_out", class: "btn btn-danger"

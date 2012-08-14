@@ -16,8 +16,8 @@ class Product < ActiveRecord::Base
     :path,
     :item_type,
     :seller_contact,
-    :title
-
+    :title,
+    :currency
 
   def to_jquery_upload
     {
@@ -30,7 +30,8 @@ class Product < ActiveRecord::Base
       delete_url: product_path(id: id),
       delete_type: "DELETE",
       seller_contact: seller_contact,
-      title: title
+      title: title,
+      currency: currency
     }
   end
 

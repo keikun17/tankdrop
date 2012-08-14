@@ -39,6 +39,15 @@
             <input type="text" pattern="\d+" id="product_price" name="product[price]" class="input small" title="Numbers only, no spaces, commas or decimal points" placeholder="price"/>
           </span>
         </td>
+        <td class="currency">
+          <span>
+            <select id="product_currency" name="product[currency]" class="input small">
+              <option value="gold">Gold</option>
+              <option value="php">PHP</option>
+              <option value="usd">USD</option>
+            </select>
+          </span>
+        </td>
         <td class="size">
           <span>
             {%=o.formatFileSize(file.size)%}
@@ -104,6 +113,7 @@
             <td class="name"><span>{%=file.name%}</span></td>
             <td class="title"><span>{%=file.title%}</span></td>
             <td class="size"><span>{%=file.price%}</span></td>
+            <td class="currency"><span>{%=file.currency%}</span></td>
             <td class="error" colspan="2">
               <span class="label label-important">
                 {%=locale.fileupload.error%}
@@ -119,7 +129,7 @@
             </td>
             <td class="price">
               <span>
-                Selling for {%=file.price%}
+                Selling for {%=file.price%} {%=file.currency%}
               </span>
             </td>
         {% } %}

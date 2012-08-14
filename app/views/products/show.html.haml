@@ -23,8 +23,8 @@
 
   %h3
     %i.icon-tag
-    = " #{@product.price}"
-    Gold
+    = " #{@product.price.to_i}"
+    = " #{@product.currency.upcase}"
 
   .control-group
     .controls

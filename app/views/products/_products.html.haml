@@ -19,8 +19,8 @@
                     %h4= link_to display_title(product, :truncate => '20'), product_url(product)
                   %p
                     %i.icon-tag
-                    = product.price
-                    Gold
+                    = product.price.to_i
+                    = product.currency.upcase
                   %p
                     - if product.user
                       %i.icon-facebook-sign

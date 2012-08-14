@@ -11,6 +11,7 @@ class ProductsController < ApplicationController
   def index
     if params[:search]
       @products = Product.where("price <= ?", params[:search])
+      @products = @products.where(currency: params[:currency].downcase)
       @products = @products.paginate(per_page: 16, page: params[:page])
       @products = @products.order("price desc")
     else

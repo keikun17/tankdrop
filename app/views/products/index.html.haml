@@ -1,7 +1,7 @@
 .row
   %h2.span9
     - if current_user
-      Welcome 
+      Welcome
       = current_user.name
     - else
       %blockquote
@@ -17,7 +17,7 @@
 %hr
 
 .row
-  .span7
+  .span6
     .alert
       %h4.alert-heading
         Be careful :
@@ -25,4 +25,11 @@
         Tankdrop is just a site that helps sellers and buyers discuss and meet.
         Tankdrop will not be responsible for anything nasty that may happen during your transactions.
 
+  .span6
+    .alert.alert-success
+      %h4.alert-heading
+        New features (Aug 14, 2012):
+      %ul
+        %li PHP and USD currency
+        %li Member store pages
 = render 'products'
