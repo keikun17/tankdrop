@@ -40,7 +40,6 @@ ActiveRecord::Schema.define(:version => 20120814135442) do
     t.datetime "updated_at",     :null => false
     t.integer  "user_id"
     t.string   "seller_contact"
-    t.string   "products"
     t.string   "currency"
   end
 

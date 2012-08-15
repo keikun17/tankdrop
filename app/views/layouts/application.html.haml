@@ -37,7 +37,7 @@
                   "What's in the Beta!"
               %li.divider-vertical
             .div.pull-right
-              = form_tag products_path, method: 'get', class: "navbar-search" do
+              = form_tag search_path, method: 'get', class: "navbar-search" do
                 = text_field_tag "search", '', placeholder: "Max Budget", class: "search-query span2"
                 = select_tag "currency", options_for_select(["Gold", "PHP", "USD"]), class: "span1"
               .nav

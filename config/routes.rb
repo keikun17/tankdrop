@@ -3,7 +3,7 @@ Tankdrop::Application.routes.draw do
   match 'auth/:provider/callback', to: 'sessions#create'
   match 'auth/failure', to: redirect('/')
   match 'signout', to: 'sessions#destroy', as: 'signout'
-
+  match 'search', to: 'searches#search'
   match 'beta_faq', to: 'faqs#beta'
 
   resources :stores
