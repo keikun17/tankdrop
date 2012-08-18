@@ -1,7 +1,8 @@
 module ApplicationHelper
+
   def display_price(product)
-    if product.price
-      price = "#{product_price} Gold"
+    if product.price.to_i > 0
+      price = "#{product.price}"
     else
       price = "Bid"
     end
