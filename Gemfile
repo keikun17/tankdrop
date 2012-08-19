@@ -10,10 +10,14 @@ gem 'rmagick'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mysql2'
+gem 'ohm'
 gem 'haml'
 gem 'haml-rails'
 
 gem 'omniauth-facebook'
+gem 'koala'
+gem 'fbgraph'
+
 gem 'acts_as_commentable', git: 'git://github.com/mickey/acts_as_commentable.git', branch: '4.0'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
