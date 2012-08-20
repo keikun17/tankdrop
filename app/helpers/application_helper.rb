@@ -2,11 +2,21 @@ module ApplicationHelper
 
   def display_price(product)
     if product.price.to_i > 0
-      price = "#{product.price}"
+      price = "#{product.price.to_i}"
+      price += " #{product.currency.upcase}" if product.currency
     else
       price = "Bid"
     end
     return price
+  end
+  
+  def display_thumbnail(product)
+    if product.from_fb_feed?
+      image_path = image_tag('/assets/tipid_d3.jpg')
+    else
+      image_path = image_tag(product.product_image.url(:squared))
+    end
+      link_to(image_path, product, :title => product.title)
   end
 
   def display_title(product, options = {})

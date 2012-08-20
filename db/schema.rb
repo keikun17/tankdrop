@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120814135442) do
+ActiveRecord::Schema.define(:version => 20120820153010) do
 
   create_table "comments", :force => true do |t|
     t.string   "title",            :limit => 50, :default => ""
@@ -36,11 +36,12 @@ ActiveRecord::Schema.define(:version => 20120814135442) do
     t.string   "product_image"
     t.integer  "price"
     t.string   "item_type"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
     t.integer  "user_id"
     t.string   "seller_contact"
     t.string   "currency"
+    t.integer  "fb_post_id",     :limit => 8
   end
 
   create_table "users", :force => true do |t|

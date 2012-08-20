@@ -17,6 +17,8 @@ gem 'haml-rails'
 gem 'omniauth-facebook'
 gem 'koala'
 gem 'fbgraph'
+gem 'later'
+gem 'rufus-scheduler'
 
 gem 'acts_as_commentable', git: 'git://github.com/mickey/acts_as_commentable.git', branch: '4.0'
 gem 'will_paginate'

@@ -5,8 +5,11 @@ class Product < ActiveRecord::Base
   acts_as_commentable
 
   belongs_to :user
+
   validates :user_id, presence: true, if: "seller_contact.blank?"
   validates :seller_contact, presence: true, if: "user_id.blank?"
+  validates :fb_post_id, uniqueness: true, allow_nil: true
+
   scope :sort_by_bump, order: "updated_at desc"
 
   attr_accessible :name,
@@ -17,7 +20,8 @@ class Product < ActiveRecord::Base
     :item_type,
     :seller_contact,
     :title,
-    :currency
+    :currency,
+    :fb_post_id
 
   def to_jquery_upload
     {
@@ -33,6 +37,10 @@ class Product < ActiveRecord::Base
       title: title,
       currency: currency
     }
+  end
+
+  def from_fb_feed?
+    fb_post_id.present?
   end
 
   def display_seller
